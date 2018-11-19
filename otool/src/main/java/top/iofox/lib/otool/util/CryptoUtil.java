@@ -19,7 +19,7 @@ public class CryptoUtil {
 
     public final static String ALGORITHM_AES = "AES/CBC/PKCS5PADDING"; //Set your own here.
     private final static String HEX = "0123456789abcdef";
-
+    private static final String SHA1PRNG = "SHA1PRNG";
 
     public static byte[] encryptAes(byte[] key, byte[] data) {
         return cipher(key, data, Cipher.ENCRYPT_MODE);
@@ -29,6 +29,17 @@ public class CryptoUtil {
         return cipher(key, data, Cipher.DECRYPT_MODE);
     }
 
+    public static class CryptoProvider extends Provider {
+        /**
+         * Creates a Provider and puts parameters
+         */
+        public CryptoProvider() {
+            super("Crypto", 1.0, "HARMONY (SHA1 digest; SecureRandom; SHA1withDSA signature)");
+            put("SecureRandom.SHA1PRNG",
+                    "org.apache.harmony.security.provider.crypto.SHA1PRNG_SecureRandomImpl");
+            put("SecureRandom.SHA1PRNG ImplementedIn", "Software");
+        }
+    }
 
     public static byte[] cipher(byte[] key, byte[] data, int opmode) {
         try {
@@ -37,7 +48,7 @@ public class CryptoUtil {
             sr.setSeed(key);
             keygen.init(256, sr);
             SecretKey secretKey = keygen.generateKey();
-            SecretKeySpec keySpec = new SecretKeySpec(secretKey.getEncoded(), "AES");
+            SecretKeySpec keySpec = new SecretKeySpec(secretKey.getEncoded(), "AES/CBC/PKCS5PADDING");
             Cipher cipher = Cipher.getInstance(ALGORITHM_AES);
             if (ALGORITHM_AES.contains("ECB")) {
                 cipher.init(opmode, secretKey); //ECB模式不需要偏移量
@@ -116,5 +127,6 @@ public class CryptoUtil {
         byte[] result = digest(message.getBytes(Charset.defaultCharset()), "MD5");
         return toHex(result);
     }
+
 
 }

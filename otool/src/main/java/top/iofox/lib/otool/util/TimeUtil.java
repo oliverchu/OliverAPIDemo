@@ -8,10 +8,7 @@ public class TimeUtil {
     public static final String NORMAL_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static final String TAG = "TimeUtil";
 
-    public static String timeStart() {
 
-        return "";
-    }
 
     /**
      * 打印run()方法执行的运行时间

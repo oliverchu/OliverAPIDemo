@@ -4,7 +4,7 @@ package top.iofox.lib.otool.ui.view;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
-import top.iofox.lib.otool.util.ResourceUtil;
+import top.iofox.lib.otool.R;
 
 /**
  * Created by [Oliver Chu] on 2018/11/19 11:58
@@ -27,7 +27,7 @@ public class ODialog extends Dialog {
     }
 
     private void init() {
-        View inflate = getLayoutInflater().inflate(ResourceUtil.getId(getContext(), "o_loading_dialog", "layout"), null);
+        View inflate = getLayoutInflater().inflate(R.layout.o_loading_dialog, null);
         setContentView(inflate);
         if (getWindow() != null) {
             getWindow().setBackgroundDrawable(null);

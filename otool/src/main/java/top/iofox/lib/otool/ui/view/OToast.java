@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import top.iofox.lib.otool.util.ResourceUtil;
+import top.iofox.lib.otool.R;
 
 
 /**
@@ -52,8 +52,8 @@ public class OToast {
     public static Toast getToast(Context context, CharSequence text, int duration, int gravity, int xOffset, int yOffset) {
         Toast toast = new Toast(context);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(ResourceUtil.getId(context, "otoast_layout", "layout"), null);
-        TextView tvMessage = v.findViewById(ResourceUtil.getId(context, "tvMessage", "id"));
+        View v = inflater.inflate(R.layout.otoast_layout, null);
+        TextView tvMessage = v.findViewById(R.id.tvMessage);
         tvMessage.setText(text);
         toast.setView(v);
         toast.setDuration(duration);

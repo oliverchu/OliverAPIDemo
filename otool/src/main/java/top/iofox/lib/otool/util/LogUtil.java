@@ -1,10 +1,11 @@
 package top.iofox.lib.otool.util;
 
 import android.util.Log;
+import top.iofox.lib.otool.BuildConfig;
 
 public class LogUtil {
 
-    private static boolean DEBUG = true;
+    private static boolean DEBUG = BuildConfig.DEBUG;
     private final static int LOG_MAX_LENGTH = 2000;
 
     public static void eLong(String tag, String msg) {
