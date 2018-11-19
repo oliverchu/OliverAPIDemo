@@ -13,7 +13,6 @@ public class ResourceUtil {
         return context.getResources().getString(getId(context, name, STRING));
     }
 
-
     public static int getId(Context context, String name, String type) {
         return context.getResources().getIdentifier(name, type, context.getPackageName());
     }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--See more: https://developer.android.google.cn/training/articles/security-config -->
+<network-security-config>
+    <!--<domain-config>-->
+    <!--<domain includeSubdomains="true" cleartextTrafficPermitted="false">example.com</domain>-->
+    <!--<trust-anchors>-->
+    <!--<certificates src="@raw/my_ca"/>-->
+    <!--<certificates src="system"/>-->
+    <!--</trust-anchors>-->
+    <!--</domain-config>-->
+    <!--<debug-overrides>-->
+    <!--<trust-anchors>-->
+    <!--<certificates src="@raw/debug_cas"/>-->
+    <!--</trust-anchors>-->
+    <!--</debug-overrides>-->
+</network-security-config>

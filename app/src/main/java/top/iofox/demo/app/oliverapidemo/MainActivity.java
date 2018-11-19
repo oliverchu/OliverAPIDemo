@@ -1,13 +1,16 @@
 package top.iofox.demo.app.oliverapidemo;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import androidx.annotation.Nullable;
 import top.iofox.demo.app.oliverapidemo.base.BaseActivity;
 import top.iofox.demo.app.oliverapidemo.util.AnnotationTest;
 import top.iofox.lib.otool.ui.view.ONotification;
-import top.iofox.lib.otool.ui.view.OToast;
 import top.iofox.lib.otool.ui.view.listener.ClickOnceListener;
+import top.iofox.lib.otool.util.CryptoUtil;
+
+import java.nio.charset.Charset;
 
 /**
  * Created by [Oliver Chu] on 2018/11/10 15:37
@@ -16,6 +19,7 @@ public class MainActivity extends BaseActivity {
 
     private  View ivLogo;
     private int count = 0;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,8 +35,10 @@ public class MainActivity extends BaseActivity {
             @Override
             public void clickOnce(View v) {
                 count++;
-                OToast.longBottom(MainActivity.this, "XX-X--XX-" + count);
-                notification.notice("1", "" + count, MainActivity.class);
+                byte[] bytes = CryptoUtil.encryptAes("oliver".getBytes(Charset.defaultCharset()), "test".getBytes(Charset.defaultCharset()));
+                byte[] bytes1 = CryptoUtil.decryptAes("oliver".getBytes(Charset.defaultCharset()), bytes);
+
+                Log.d(TAG, "clickOnce: " + new String(bytes1, Charset.defaultCharset()));
             }
         });
     }
