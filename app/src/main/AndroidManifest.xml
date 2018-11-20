@@ -12,6 +12,7 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name=".MainActivity"
+                android:theme="@style/Theme.AppCompat.NoActionBar"
                 android:logo="@drawable/ic_oliver">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>

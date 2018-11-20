@@ -2,8 +2,6 @@ package top.iofox.demo.app.oliverapidemo;
 
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import top.iofox.demo.app.oliverapidemo.base.BaseActivity;
@@ -30,11 +28,9 @@ public class MainActivity extends BaseActivity {
         test.WorkerThread();
         test.UiThread();
         test.MainThread();
-        final WebView wbWeb = findViewById(R.id.wbWeb);
-        wbWeb.loadUrl("https://baidu.com");
-        wbWeb.setWebViewClient(new WebViewClient());
         final ONotification notification = new ONotification(this);
-        DeviceUtil.setStatusBar(this, getResources().getColor(R.color.colorPrimary));
+//        DeviceUtil.setStatusBar(this, getResources().getColor(R.color.colorPrimary));
+        DeviceUtil.setImmerseLayout(this, ivLogo);
         findViewById(R.id.btnClick).setOnClickListener(new ClickOnceListener() {
             @Override
             public void clickOnce(View v) {

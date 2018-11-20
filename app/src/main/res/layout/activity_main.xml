@@ -13,12 +13,6 @@
             android:src="@drawable/ic_oliver"
             android:layout_height="wrap_content"/>
 
-    <WebView
-            android:layout_width="match_parent"
-            android:id="@+id/wbWeb"
-            android:layout_height="match_parent">
-
-    </WebView>
     <Button
             android:id="@+id/btnClick"
             android:layout_width="wrap_content"
@@ -26,5 +20,4 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"/>
-
 </RelativeLayout>
