@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<top.iofox.lib.otool.ui.view.ContentLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        app:header_layout="@layout/content_layout_default_header"
+        app:loading_layout="@layout/layout_header"
+        app:network_error_layout="@layout/layout_header"
+        app:header_show_left_button="true"
+        app:header_title="@string/app_name"
+        app:empty_layout="@layout/layout_header"
+        android:layout_height="match_parent">
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</top.iofox.lib.otool.ui.view.ContentLayout>

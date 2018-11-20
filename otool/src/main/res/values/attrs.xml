@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ContentLayout">
+        <attr name="header_layout" format="reference"/>
+        <attr name="empty_layout" format="reference"/>
+        <attr name="network_error_layout" format="reference"/>
+        <attr name="loading_layout" format="reference"/>
+        <attr name="header_show_left_button" format="boolean"/>
+        <attr name="header_title" format="string"/>
+    </declare-styleable>
+</resources>

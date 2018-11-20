@@ -51,7 +51,7 @@ public class CryptoUtil {
             SecretKeySpec keySpec = new SecretKeySpec(secretKey.getEncoded(), "AES/CBC/PKCS5PADDING");
             Cipher cipher = Cipher.getInstance(ALGORITHM_AES);
             if (ALGORITHM_AES.contains("ECB")) {
-                cipher.init(opmode, secretKey); //ECB模式不需要偏移量
+                cipher.init(opmode, keySpec); //ECB模式不需要偏移量
             } else {
                 cipher.init(opmode, keySpec, new IvParameterSpec(new byte[cipher.getBlockSize()]));
             }
