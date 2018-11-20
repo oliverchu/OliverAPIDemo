@@ -1,6 +1,5 @@
 package top.iofox.lib.otool.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.view.View;
@@ -12,9 +11,8 @@ import androidx.core.graphics.ColorUtils;
  * Created by [Oliver Chu] on 2018/11/20 17:32
  */
 public class DeviceUtil {
-    public static void setStatusBar(Activity activity, int color) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Window window = activity.getWindow();
+    public static void setStatusBar(Window window, int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && window != null) {
             // 设置状态栏底色颜色
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -30,13 +28,12 @@ public class DeviceUtil {
 
     }
 
-    public static void setImmerseLayout(Activity activity, View view) {// view为标题栏
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = activity.getWindow();
+    public static int setImmerseLayout(Window window) {// view为标题栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && window != null) {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            int statusBarHeight = getStatusBarHeight(activity);
-//            view.setPadding(0, statusBarHeight, 0, 0);
+            return getStatusBarHeight(window.getContext());
         }
+        return 0;
     }
 
     public static int getStatusBarHeight(Context context) {

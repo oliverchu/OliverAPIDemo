@@ -3,11 +3,16 @@ package top.iofox.lib.otool.ui.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import top.iofox.lib.otool.R;
+import top.iofox.lib.otool.util.DeviceUtil;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -15,13 +20,15 @@ import java.lang.annotation.RetentionPolicy;
 
 public class ContentLayout extends LinearLayout {
 
+    private static final String TAG = "ContentLayout";
+
     public static final int EMPTY_DATA = 1;
     public static final int NETWORK_ERROR = -1;
     public static final int NORMAL = 0;
 
     private LayoutInflater inflater;
     private View vEmptyData, vNetworkError, vContent, vLoading, vHeader;
-
+    private int statusBarHeight = 0;
     @Retention(RetentionPolicy.SOURCE)
     public @interface Status {
     }
@@ -44,10 +51,10 @@ public class ContentLayout extends LinearLayout {
         setOrientation(VERTICAL);
         inflater = LayoutInflater.from(getContext());
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.ContentLayout);
-        inflateLayout(array, R.styleable.ContentLayout_header_layout, vHeader, VISIBLE);
-        inflateLayout(array, R.styleable.ContentLayout_empty_layout, vEmptyData, GONE);
-        inflateLayout(array, R.styleable.ContentLayout_network_error_layout, vNetworkError, GONE);
-        inflateLayout(array, R.styleable.ContentLayout_loading_layout, vLoading, GONE);
+        vHeader = inflateLayout(array, R.styleable.ContentLayout_header_layout, vHeader, VISIBLE);
+        vEmptyData = inflateLayout(array, R.styleable.ContentLayout_empty_layout, vEmptyData, GONE);
+        vNetworkError = inflateLayout(array, R.styleable.ContentLayout_network_error_layout, vNetworkError, GONE);
+        vLoading = inflateLayout(array, R.styleable.ContentLayout_loading_layout, vLoading, GONE);
         boolean headerShowLeftButton = array.getBoolean(R.styleable.ContentLayout_header_show_left_button, true);
         toggleVisibility(findViewById(R.id.ibHome), headerShowLeftButton ? VISIBLE : INVISIBLE);
         String headerTitle = array.getString(R.styleable.ContentLayout_header_title);
@@ -57,13 +64,25 @@ public class ContentLayout extends LinearLayout {
         array.recycle();
     }
 
-    private void inflateLayout(TypedArray array, int id, View viewType, int visibility) {
+    public void setupImmersiveBar(Window window) {
+        statusBarHeight = DeviceUtil.setImmerseLayout(window);
+        Log.d(TAG, "setupImmersiveBar: " + statusBarHeight + "  " + (vHeader == null));
+        if (statusBarHeight != 0 && vHeader != null) {
+            RelativeLayout layout = vHeader.findViewById(R.id.rlHeaderContent);
+            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) layout.getLayoutParams();
+            layoutParams.topMargin = statusBarHeight;
+            layout.setLayoutParams(layoutParams);
+        }
+    }
+
+    private View inflateLayout(TypedArray array, int id, View viewType, int visibility) {
         if (array != null) {
             int headerId = array.getResourceId(id, -1);
             if (headerId != -1) {
-                getReplacedView(viewType, headerId, visibility);
+                return getReplacedView(viewType, headerId, visibility);
             }
         }
+        return null;
     }
 
 
@@ -88,10 +107,10 @@ public class ContentLayout extends LinearLayout {
             removeView(view);
             view = null;
         }
-        View newView = inflater.inflate(res, this, false);
-        addView(newView);
-        newView.setVisibility(initStatus);
-        return newView;
+        view = inflater.inflate(res, this, false);
+        addView(view);
+        view.setVisibility(initStatus);
+        return view;
     }
 
     /**

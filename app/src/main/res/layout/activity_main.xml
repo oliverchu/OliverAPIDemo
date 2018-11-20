@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<top.iofox.lib.otool.ui.view.ContentLayout
+        android:id="@+id/clContainer"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:header_layout="@layout/content_layout_default_header"
         android:layout_height="match_parent"
+        app:header_title="@string/app_name"
         tools:context=".MainActivity">
 
     <ImageView
@@ -20,4 +24,4 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"/>
-</RelativeLayout>
+</top.iofox.lib.otool.ui.view.ContentLayout>
