@@ -7,5 +7,6 @@
         <attr name="loading_layout" format="reference"/>
         <attr name="header_show_left_button" format="boolean"/>
         <attr name="header_title" format="string"/>
+        <attr name="header_height" format="dimension" />
     </declare-styleable>
 </resources>
