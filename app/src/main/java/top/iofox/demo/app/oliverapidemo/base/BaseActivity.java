@@ -1,5 +1,7 @@
 package top.iofox.demo.app.oliverapidemo.base;
 
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 /***************************************
@@ -14,4 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
  ***************************************/
 public class BaseActivity extends AppCompatActivity {
 
+    public <T extends View> T findViewById(int id, Class<T> type) {
+        View view = findViewById(id);
+        if (view != null) {
+            return (T) view;
+        }
+        return null;
+    }
 }

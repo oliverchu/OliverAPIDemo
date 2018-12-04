@@ -2,20 +2,22 @@ package top.iofox.lib.otool.ui.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.ImageDecoder;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import top.iofox.lib.otool.R;
-import top.iofox.lib.otool.util.DeviceUtil;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import top.iofox.lib.otool.R;
+import top.iofox.lib.otool.util.DeviceUtil;
 
 
 public class ContentLayout extends LinearLayout {
@@ -28,7 +30,7 @@ public class ContentLayout extends LinearLayout {
 
     private LayoutInflater inflater;
     private View vEmptyData, vNetworkError, vContent, vLoading, vHeader;
-    private int statusBarHeight = 0;
+    private int statusBarHeight = 0, headerHeight = 0;
     @Retention(RetentionPolicy.SOURCE)
     public @interface Status {
     }
@@ -55,22 +57,30 @@ public class ContentLayout extends LinearLayout {
         vEmptyData = inflateLayout(array, R.styleable.ContentLayout_empty_layout, vEmptyData, GONE);
         vNetworkError = inflateLayout(array, R.styleable.ContentLayout_network_error_layout, vNetworkError, GONE);
         vLoading = inflateLayout(array, R.styleable.ContentLayout_loading_layout, vLoading, GONE);
+        headerHeight = array.getDimensionPixelSize(R.styleable.ContentLayout_header_height, 0);
+        setHeaderHeight();
         boolean headerShowLeftButton = array.getBoolean(R.styleable.ContentLayout_header_show_left_button, true);
         toggleVisibility(findViewById(R.id.ibHome), headerShowLeftButton ? VISIBLE : INVISIBLE);
         String headerTitle = array.getString(R.styleable.ContentLayout_header_title);
         if (headerTitle != null) {
             headerTitle(headerTitle);
         }
+        ImageDecoder.Source source = ImageDecoder.createSource(getResources(), R.drawable.ic_keyboard_arrow_left_black_24dp);
+
         array.recycle();
     }
 
     public void setupImmersiveBar(Window window) {
         statusBarHeight = DeviceUtil.setImmerseLayout(window);
         Log.d(TAG, "setupImmersiveBar: " + statusBarHeight + "  " + (vHeader == null));
-        if (statusBarHeight != 0 && vHeader != null) {
-            RelativeLayout layout = vHeader.findViewById(R.id.rlHeaderContent);
-            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) layout.getLayoutParams();
-            layoutParams.topMargin = statusBarHeight;
+        setHeaderHeight();
+    }
+
+    private void setHeaderHeight() {
+        if (vHeader != null) {
+            FrameLayout layout = (FrameLayout) vHeader;
+            ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) layout.getLayoutParams();
+            layoutParams.height = statusBarHeight + headerHeight;
             layout.setLayoutParams(layoutParams);
         }
     }
