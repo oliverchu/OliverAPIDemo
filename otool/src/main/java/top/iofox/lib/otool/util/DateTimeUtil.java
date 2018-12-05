@@ -1,13 +1,35 @@
 package top.iofox.lib.otool.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * Created by [Oliver Chu] on 2018/11/19 3:38
  */
-public class TimeUtil {
+public class DateTimeUtil {
+    private static final String TAG = "DateTimeUtil";
 
-    public static final String NORMAL_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private static final String TAG = "TimeUtil";
+    /**
+     * 将日期格式化成 yyyy-MM-dd HH:mm:ss 的形式
+     *
+     * @param date
+     * @return
+     */
+    public static String formatDate(Date date) {
+        return formatDate(date, "yyyy-MM-dd HH:mm:ss");
+    }
 
+    public static String formatDate(Date date, String pattern) {
+        if (date != null) {
+            try {
+                return new SimpleDateFormat(pattern, Locale.US).format(date);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return "";
+    }
 
 
     /**

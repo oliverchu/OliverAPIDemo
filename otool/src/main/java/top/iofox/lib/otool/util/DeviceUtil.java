@@ -7,6 +7,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import androidx.core.graphics.ColorUtils;
 
+import java.io.File;
+
 /**
  * Created by [Oliver Chu] on 2018/11/20 17:32
  */
@@ -46,5 +48,23 @@ public class DeviceUtil {
         return result;
     }
 
+    /**
+     * 检测是否root
+     *
+     * @return
+     */
+    public static boolean hasCracked() {
+        boolean bool = false;
+        try {
+            if ((!new File("/system/bin/su").exists()) && (!new File("/system/xbin/su").exists())) {
+                bool = false;
+            } else {
+                bool = true;
+            }
+        } catch (Exception e) {
+
+        }
+        return bool;
+    }
 
 }
