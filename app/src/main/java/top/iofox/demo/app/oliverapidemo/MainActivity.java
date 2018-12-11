@@ -1,6 +1,7 @@
 package top.iofox.demo.app.oliverapidemo;
 
 import android.content.BroadcastReceiver;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import top.iofox.demo.app.oliverapidemo.base.BaseActivity;
 import top.iofox.demo.app.oliverapidemo.util.AnnotationTest;
+import top.iofox.lib.otool.ui.activity.WebActivity;
 import top.iofox.lib.otool.ui.view.SlideLayout;
 
 /**
@@ -40,7 +42,7 @@ public class MainActivity extends BaseActivity {
         test.UiThread();
         test.MainThread();
         ivLogo.setImageResource(R.drawable.ic_webp);
-
+        startActivity(new Intent(this,WebActivity.class));
     }
 
     @Override
