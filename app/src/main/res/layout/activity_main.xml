@@ -1,70 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<top.iofox.lib.otool.ui.view.ContentLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clContainer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:header_height="50dp"
-    app:header_layout="@layout/content_layout_default_header"
-    app:header_title="@string/app_name"
-    tools:context=".MainActivity">
+<top.iofox.lib.otool.ui.view.ContentLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/clContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:header_height="50dp"
+        app:header_layout="@layout/content_layout_default_header"
+        app:header_title="@string/app_name"
+        tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/etInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            android:id="@+id/etInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     <ImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_webp" />
+            android:id="@+id/ivLogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_webp"/>
 
     <Button
-        android:id="@+id/btnClick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/app_name" />
+            android:id="@+id/btnClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/app_name"/>
 
     <top.iofox.lib.otool.ui.view.SlideLayout
-        android:id="@+id/slLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:id="@+id/slLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_gravity="right"
-            android:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_gravity="right"
+                android:orientation="horizontal">
 
             <TextView
-                android:layout_width="100dp"
-                android:text="删除"
-                android:textSize="20dp"
-                android:textColor="@android:color/white"
-                android:gravity="center"
-                android:background="@android:color/holo_red_dark"
-                android:layout_height="match_parent" />
+                    android:layout_width="100dp"
+                    android:text="删除"
+                    android:textSize="20dp"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:background="@android:color/holo_red_dark"
+                    android:layout_height="match_parent"/>
 
             <TextView
-                android:layout_width="100dp"
-                android:text="置顶"
-                android:textSize="20dp"
-                android:textColor="@android:color/white"
-                android:gravity="center"
-                android:background="@android:color/holo_blue_dark"
-                android:layout_height="match_parent" />
+                    android:layout_width="100dp"
+                    android:text="置顶"
+                    android:textSize="20dp"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:background="@android:color/holo_blue_dark"
+                    android:layout_height="match_parent"/>
         </LinearLayout>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@android:color/holo_blue_bright"
-            android:visibility="visible" />
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@android:color/holo_blue_bright"
+                android:visibility="visible"/>
 
     </top.iofox.lib.otool.ui.view.SlideLayout>
 </top.iofox.lib.otool.ui.view.ContentLayout>
