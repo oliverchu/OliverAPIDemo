@@ -2,6 +2,7 @@ package top.iofox.demo.app.oliverapidemo;
 
 import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import top.iofox.demo.app.oliverapidemo.base.BaseActivity;
 import top.iofox.demo.app.oliverapidemo.util.AnnotationTest;
 import top.iofox.lib.otool.ui.activity.WebActivity;
 import top.iofox.lib.otool.ui.view.SlideLayout;
+import top.iofox.lib.otool.util.IntentUtil;
 
 /**
  * Created by [Oliver Chu] on 2018/11/10 15:37
@@ -30,11 +32,11 @@ public class MainActivity extends BaseActivity {
         EditText etInput = findViewById(R.id.etInput);
         etInput.setCursorVisible(false);
         ivLogo = findViewById(R.id.ivLogo);
-
         ivLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findViewById(R.id.slLayout, SlideLayout.class).close();
+//                findViewById(R.id.slLayout, SlideLayout.class).close();
+                IntentUtil.getBitmapFromSystem(MainActivity.this,"");
             }
         });
         AnnotationTest test = new AnnotationTest();
@@ -42,7 +44,15 @@ public class MainActivity extends BaseActivity {
         test.UiThread();
         test.MainThread();
         ivLogo.setImageResource(R.drawable.ic_webp);
-        startActivity(new Intent(this,WebActivity.class));
+//        startActivity(new Intent(this,WebActivity.class));
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Bitmap bitmap = IntentUtil.resolveBitmapFromSystem(this, requestCode, resultCode, data);
+        ivLogo.setImageBitmap(bitmap);
     }
 
     @Override
