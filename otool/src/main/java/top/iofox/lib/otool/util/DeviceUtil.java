@@ -13,6 +13,8 @@ import java.io.File;
  * Created by [Oliver Chu] on 2018/11/20 17:32
  */
 public class DeviceUtil {
+
+
     public static void setStatusBar(Window window, int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && window != null) {
             // 设置状态栏底色颜色

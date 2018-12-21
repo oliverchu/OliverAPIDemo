@@ -1,12 +1,27 @@
 package top.iofox.lib.otool.util;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import top.iofox.lib.otool.BuildConfig;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class LogUtil {
 
     private static boolean DEBUG = BuildConfig.DEBUG;
     private final static int LOG_MAX_LENGTH = 2000;
+
+    private static String gTag = "LogUtil";
+
+
+    public LogUtil t(String tag) {
+        gTag = tag;
+        return this;
+    }
 
     public static void eLong(String tag, String msg) {
         printLong(Log.ERROR, tag, msg);
@@ -127,4 +142,116 @@ public class LogUtil {
     public static void eAutoTag(Object parentClz, String msg) {
         e(parentClz.getClass().getSimpleName(), msg);
     }
+
+    public static void dPretty(String msg) {
+        Log.d(gTag, "╒════════════════════════════════════════════════════");
+        String[] split = msg.split("\n");
+        for (String k : split) {
+            Log.d(gTag, "│" + k);
+        }
+        Log.d(gTag, "╘════════════════════════════════════════════════════");
+    }
+
+
+    public static void dPretty(Iterable list) {
+
+        try {
+            throw new Exception("Null");
+        } catch (Exception ex) {
+            StackTraceElement[] stackTrace = ex.getStackTrace();
+            String s = stackTrace[1].toString();
+
+            Log.d(gTag, "│." + stackTrace[1].getMethodName() + "(" + stackTrace[1].getFileName() + ":" + stackTrace[1].getLineNumber() + ")");
+            Log.d(gTag, "│\t." + stackTrace[2].getMethodName() + "(" + stackTrace[1].getFileName() + ":" + stackTrace[2].getLineNumber() + ")");
+        }
+
+
+        Log.d(gTag, "│" + list.getClass().getName());
+        Log.d(gTag, "╞════════════════════════════════════════════════════");
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Log.d(gTag, "│" + iterator.next());
+        }
+        Log.d(gTag, "╘════════════════════════════════════════════════════");
+    }
+
+    public static void dPretty(Intent intent) {
+        int flags = intent.getFlags();
+        Log.d(gTag, "│Data=" + intent.getDataString());
+        Log.d(gTag, "│Data=" + intent.getAction());
+        Log.d(gTag, "│Type=" + intent.getType());
+        if (intent.getExtras() != null) {
+            dPretty(intent.getExtras());
+        }
+        Log.d(gTag, intent.toString());
+    }
+
+
+    private void print() {
+
+    }
+
+    public static void dPretty(Bundle bundle) {
+        for (String key : bundle.keySet()) {
+            Log.d(gTag, "│" + key + ": " + bundle.get(key));
+        }
+    }
+
+
+    public static void dPretty(Set sets) {
+        for (Object k : sets) {
+            Log.d(gTag, "│" + k.toString());
+        }
+    }
+
+
+    public static void dPretty(Map map) {
+        Log.d(gTag, "╒════════════════════════════════════════════════════");
+
+        try {
+            throw new Exception("Null");
+        } catch (Exception ex) {
+            StackTraceElement[] stackTrace = ex.getStackTrace();
+            String s = stackTrace[1].toString();
+
+            Log.d(gTag, "│." + stackTrace[1].getMethodName() + "(" + stackTrace[1].getFileName() + ":" + stackTrace[1].getLineNumber() + ")");
+            Log.d(gTag, "│\t." + stackTrace[2].getMethodName() + "(" + stackTrace[1].getFileName() + ":" + stackTrace[2].getLineNumber() + ")");
+        }
+
+        Log.d(gTag, "╞════════════════════════════════════════════════════");
+        for (Object k : map.keySet()) {
+            Log.d(gTag, "│" + k.toString() + ":" + map.get(k));
+        }
+        Log.d(gTag, "╘════════════════════════════════════════════════════");
+
+
+    }
+
+    public static void setDebug(boolean debug) {
+        LogUtil.DEBUG = debug;
+    }
+
+    public static void dPretty(List list) {
+        Log.d(gTag, "╒════════════════════════════════════════════════════");
+
+        try {
+            throw new Exception("Null");
+        } catch (Exception ex) {
+            StackTraceElement[] stackTrace = ex.getStackTrace();
+            String s = stackTrace[1].toString();
+
+            Log.d(gTag, "│." + stackTrace[1].getMethodName() + "(" + stackTrace[1].getFileName() + ":" + stackTrace[1].getLineNumber() + ")");
+            Log.d(gTag, "│\t." + stackTrace[2].getMethodName() + "(" + stackTrace[1].getFileName() + ":" + stackTrace[2].getLineNumber() + ")");
+        }
+
+
+        Log.d(gTag, "│" + list.getClass().getName());
+        Log.d(gTag, "╞════════════════════════════════════════════════════");
+        for (Object k : list) {
+            Log.d(gTag, "│" + k.toString());
+        }
+        Log.d(gTag, "╘════════════════════════════════════════════════════");
+    }
+
+
 }
